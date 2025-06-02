@@ -39,6 +39,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: SHA
+        id: set_short_sha
+        run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
       - name: Build and push multi-platform image
         uses: docker/build-push-action@v5
         with:
@@ -47,9 +51,9 @@ jobs:
           push: true
           tags: |
             ghcr.io/gadziorwth/zadanie1:latest
-            ghcr.io/gadziorwth/zadanie1:${{ github.sha | slice(0,7) }}
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME | lower }}/zad2-repo:builder
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME | lower }}/zad2-repo:builder,mode=max
+            ghcr.io/gadziorwth/zadanie1:${{ steps.set_short_sha.outputs.SHORT_SHA }}
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder,mode=max
           provenance: false
 
       - name: Trivy
