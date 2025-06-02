@@ -52,8 +52,8 @@ jobs:
           context: .
           platforms: linux/arm64,linux/amd64
           load: true
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/cache-repo:builder-${{ github.ref_name }}
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/cache-repo:builder-${{ github.ref_name }},mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder-${{ github.ref_name }}
+          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder-${{ github.ref_name }},mode=max
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: false
