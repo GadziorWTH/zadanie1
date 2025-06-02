@@ -53,8 +53,8 @@ jobs:
           platforms: linux/arm64,linux/amd64
           load: true
           tags: |
-            ghcr.io/${{ gadziorwth }}/${{ github.event.repository.name }}:latest
-            ghcr.io/${{ gadziorwth }}/${{ github.event.repository.name }}:${{ github.sha }}
+            ghcr.io/gadziorwth/${{ github.event.repository.name }}:latest
+            ghcr.io/gadziorwth/${{ github.event.repository.name }}:${{ github.sha }}
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder-${{ github.ref_name }}
           cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/zad2-repo:builder-${{ github.ref_name }},mode=max
           labels: ${{ steps.meta.outputs.labels }}
